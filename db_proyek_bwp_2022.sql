@@ -1,0 +1,12 @@
+CREATE DATABASE /*!32312 IF NOT EXISTS*/'db_proyek_bwp_2022' /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE 'T7_221116980';
+
+DROP TABLE IF EXISTS 'user';
+
+CREATE TABLE 'user' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'usename' varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
