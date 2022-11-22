@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `menu`;
 DROP TABLE IF EXISTS `dtrans`;
 DROP TABLE IF EXISTS `htrans`;
+DROP TABLE IF EXISTS `promo`;
+DROP TABLE IF EXISTS `kategori`;
 
 CREATE TABLE `users` (
   `user_id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -16,28 +18,42 @@ CREATE TABLE `users` (
 
 CREATE TABLE `menu` (
   `menu_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `kategori_id` INT(10) NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `price` INT(10) NOT NULL,
-  `stok` INT(6) NOT NULL,
-  `image` TEXT NOT NULL,
+  `menu_kategori_id` INT(10) NOT NULL,
+  `menu_name` VARCHAR(255) NOT NULL,
+  `menu_price` INT(10) NOT NULL,
+  `menu_stok` INT(6) NOT NULL,
+  `menu_image` TEXT NOT NULL,
   PRIMARY KEY (`menu_id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `dtrans` (
   `dtrans_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `menu_id` INT(10) NOT NULL,
-  `quantity` INT(5) NOT NULL,
-  `subtotal` INT(10) NOT NULL,
+  `dtrans_menu_id` INT(10) NOT NULL,
+  `dtrans_quantity` INT(5) NOT NULL,
+  `dtrans_subtotal` INT(10) NOT NULL,
   PRIMARY KEY (`dtrans_id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `htrans` (
   `htrans_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `user_id` INT(10) NOT NULL,
-  `promo_id` INT(10) NOT NULL,
-  `tanggal_transaksi` DATE NOT NULL,
-  `total` INT(10) NOT NULL,
-  `status` INT(1) NOT NULL,
+  `htrans_user_id` INT(10) NOT NULL,
+  `htrans_promo_id` INT(10) NOT NULL,
+  `htrans_tanggal_transaksi` DATE NOT NULL,
+  `htrans_total` INT(10) NOT NULL,
+  `htrans_status` INT(1) NOT NULL,
   PRIMARY KEY (`htrans_id`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `promo` (
+  `promo_id` INT(10) NOT NULL AUTO_INCREMENT,
+  `promo_name` VARCHAR(255) NOT NULL,
+  `promo_value` INT(10) NOT NULL,
+  `promo_type` INT(1) NOT NULL,
+  PRIMARY KEY (`promo_id`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `kategori` (
+  `kategori_id` INT(10) NOT NULL AUTO_INCREMENT,
+  `kategori_name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`kategori_id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
