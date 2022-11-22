@@ -1,6 +1,6 @@
 <?php
     require_once("connection.php");
-    $result = mysqli_fetch_array(mysqli_query($conn,"SELECT * from user where id=".$_SESSION["loggedIn"]["ID"]));
+    $result = mysqli_fetch_array(mysqli_query($conn,"SELECT * from users where user_id=".$_SESSION["loggedIn"]["user_id"]));
 
 ?>
 <!DOCTYPE html>

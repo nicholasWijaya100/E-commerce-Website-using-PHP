@@ -1,7 +1,7 @@
 <?php
     require_once("connection.php");
     
-    $result = mysqli_query($conn,"SELECT * from user");
+    $result = mysqli_query($conn,"SELECT * from users");
 
     if(isset($_POST['login'])){
         $username = $_POST["username"];
@@ -26,7 +26,7 @@
                 if($pass == $row["password"]){
                     $_SESSION["loggedIn"] = [
                         "username" => $username,
-                        "ID" => $row["id"]
+                        "user_id" => $row["user_id"]
                     ];
                     header("Location: home.php");
                 }else{

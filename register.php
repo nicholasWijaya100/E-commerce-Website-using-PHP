@@ -1,6 +1,6 @@
 <?php
     require_once("connection.php");
-    $result = mysqli_query($conn,"SELECT * from user");
+    $result = mysqli_query($conn,"SELECT * from users");
 
     if(isset($_POST['register'])){
         $available = true;
@@ -23,7 +23,7 @@
             header("Location: register.php");
         }elseif($available){
             if($_POST["pass"] == $_POST["cpass"]){
-                mysqli_query($conn,"INSERT into user values('','$username','$pass')");
+                mysqli_query($conn,"INSERT into users values('','$username','$pass',0)");
                 $_SESSION["message"] = "Berhasil register";
                 header("Location: index.php");
             }else{
@@ -51,7 +51,7 @@
         <p>Password : <input type="password" name="pass" placeholder="Masukan Password"></p>
         <p>Confirm : <input type="password" name="cpass" placeholder="Masukan Confirm Password"></p>
         <input type="submit" value="Register" name="register">
-        <input type="submit" value="Sign In" formaction="index.php">
+        <input type="submit" value="Sign Up" formaction="index.php">
     </form>
 </body>
 </html>

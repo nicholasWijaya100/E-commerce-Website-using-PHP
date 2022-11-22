@@ -11,7 +11,7 @@ CREATE TABLE `users` (
   `username` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `saldo` INT(10) NOT NULL,
-  PRIMARY KEY (`users_id`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `menu` (
