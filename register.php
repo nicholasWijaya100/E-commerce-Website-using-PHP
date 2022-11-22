@@ -23,7 +23,18 @@
             header("Location: register.php");
         }elseif($available){
             if($_POST["pass"] == $_POST["cpass"]){
-                mysqli_query($conn,"INSERT into users values('','$username','$pass',0)");
+                $query = mysqli_query($conn, "SELECT COUNT(*) AS hitung FROM users");
+                $result = mysqli_fetch_object($query);
+                $jumlahID = $result->hitung;
+                $jumlahID++;
+                $id = "CUS";
+                if($jumlahID < 10)
+                    $id = $id . "00" . $jumlahID;
+                else if($jumlahID < 100)
+                    $id = $id . "0" . $jumlahID;
+                else
+                    $id = $id . $jumlahID;
+                mysqli_query($conn,"INSERT into users values('$id','$username','$pass',0)");
                 $_SESSION["message"] = "Berhasil register";
                 header("Location: index.php");
             }else{

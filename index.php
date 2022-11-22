@@ -25,9 +25,10 @@
                 $check = true;
                 if($pass == $row["password"]){
                     $_SESSION["loggedIn"] = [
-                        "username" => $username,
-                        "user_id" => $row["user_id"]
+                        "user_id" => $row["user_id"],
+                        "username" => $username
                     ];
+                    echo $_SESSION["loggedIn"]["user_id"];
                     header("Location: home.php");
                 }else{
                     $_SESSION["message"] = "Password tidak sesuai";
