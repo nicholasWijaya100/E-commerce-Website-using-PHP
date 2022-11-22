@@ -17,12 +17,6 @@
 </head>
 
 <style>
-    .hilang{
-        visibility: hidden;
-    }
-    .muncul{
-        visibility: visible;
-    }
 </style>
 <body onload="load_ajax()">
     <form action="" method="POST">
@@ -33,60 +27,97 @@
     <input type="radio" id="rbKategori" name="rbSearch" value="kategori" onclick="checkRb(value)"> Kategori  
     <input type="radio" id="rbHarga" name="rbSearch" value="harga" onclick="checkRb(value)"> Harga  
     <br>
-    <input type="text" id="search" placeholder="Search Menu">
+    <input type="text" id="searchNama" placeholder="Search Menu By Nama">
     <select name="kategori_id" id="cbKategori" style="visibility: hidden;">
-      <?php
-      if ($listKategori !== null) {
+        <?php
+        if ($listKategori !== null) {
+            ?>
+        <option value="Semua">Semua</option>
+        <?php
         foreach ($listKategori as $key => $value) {
-      ?>
-          <option value="<?= $value['kategori_id'] ?>"><?= $value['kategori_nama'] ?></option>
-      <?php
+            ?>
+          <option value="<?= $value['kategori_id'] ?>"><?= $value['kategori_name'] ?></option>
+          <?php
+            }
         }
-      }
-      ?>
+        ?>
 
     </select>
+    <input type="text" id="searchHarga" placeholder="Search Menu By Harga" style="visibility: hidden;">
     <table border="1" id="tabelMenu">
     
     </table>
 
     <script>
-        hasilSearch = document.getElementById("search");
+        searchNama = document.getElementById("searchNama");
+        searchHarga = document.getElementById("searchHarga");
+        cbKategori = document.getElementById("cbKategori");
+
         rbNama = document.getElementById("rbNama");
         rbKategori = document.getElementById("rbKategori");
         rbHarga = document.getElementById("rbHarga");
-
-        cbKategori = document.getElementById("cbKategori");
-
+        
+        hasilSearch = "";
+        hasilCb = "Semua";
+        cekHarga = 0;
         function load_ajax() {
             fetchMenu();
         }
 
         function fetchMenu(){
-            hasilSearch = document.getElementById("search").value;
             r = new XMLHttpRequest();
             r.onreadystatechange = function() {
                 if ((this.readyState==4) && (this.status==200)) {
                     tabelMenu.innerHTML = this.responseText;
                 }
             }
-
-            r.open('GET', 'fetchMenu.php?keyword='+hasilSearch);
+            
+            r.open('GET', 'fetchMenu.php?keyword='+hasilSearch+'&kat='+hasilCb+'&harga='+cekHarga);
             r.send();
         }
         
-        hasilSearch.oninput = function (){
+        searchNama.oninput = function (){
+            hasilSearch = document.getElementById("searchNama").value;
             fetchMenu();
+        };
+        searchHarga.oninput = function (){
+            if(!isNaN(searchHarga.value)){
+                cekHarga = document.getElementById("searchHarga").value;
+                fetchMenu();
+            }
         };
 
         function checkRb(value){
             if(value == "nama"){
-                document.getElementById("search").style.visibility="visible";
+                reset();
+                document.getElementById("searchNama").style.visibility="visible";
                 document.getElementById("cbKategori").style.visibility="hidden";
+                document.getElementById("searchHarga").style.visibility="hidden";
             }else if(value == "kategori"){
+                reset();
+                document.getElementById("searchNama").style.visibility="hidden";
                 document.getElementById("cbKategori").style.visibility="visible";
-                document.getElementById("search").style.visibility="hidden";
+                document.getElementById("searchHarga").style.visibility="hidden";
+            }else if(value == "harga"){
+                reset();
+                document.getElementById("searchNama").style.visibility="hidden";
+                document.getElementById("cbKategori").style.visibility="hidden";
+                document.getElementById("searchHarga").style.visibility="visible";
             }
+        }
+
+        function reset(){
+            hasilSearch = "";
+            hasilCb = "Semua";
+            cekHarga = 0;
+            document.getElementById("searchNama").value = "";
+            document.getElementById("searchHarga").value = 0;
+            fetchMenu();
+        }
+
+        cbKategori.onchange = (ev) =>{
+            hasilCb = cbKategori.options[cbKategori.selectedIndex].value;
+            fetchMenu();
         }
 
     </script>
