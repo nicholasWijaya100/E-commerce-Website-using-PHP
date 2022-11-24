@@ -52,15 +52,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Login</h1>
-    <form action="" method="POST">
-        <p>Username: <input type="text" name="username"></p> 
-        <p>Password: <input type="password" name="pass"></p>
-        <input type="submit" name="login" value="Sign Up">
-        <input type="submit" formaction="register.php" value="Sign In">
-    </form>
+    <div class="login-card">
+        <h1>Login</h1><br>
+        <form action="" method="POST">
+            <div class="form-rows">
+                <input type="text" name="username" placeholder="Username" class="text-input">
+            </div>
+            <div class="form-rows">
+                <input type="password" name="pass" placeholder="Password" class="text-input">
+                
+            </div>
+
+            <input type="submit" formaction="register.php" value="Register" class="login-buttons">
+            <input type="submit" name="login" value="Sign In" class="login-buttons">
+
+        </form>
+        
+    </div>
 </body>
 </html>

@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Pacifico
+Author: Vernon Adams
+Url: http://www.fontsquirrel.com/fonts/pacifico
+
+Font: Poppins
+Author: Indian Type Foundry
+Url: https://www.fontsquirrel.com/fonts/poppins
