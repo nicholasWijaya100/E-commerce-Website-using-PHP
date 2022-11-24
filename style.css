@@ -56,7 +56,7 @@ body{
 }
 .nav-items{
     width: 35%;
-    height: 7%;
+    height: 6%;
     /* border: black solid 1px; */
     border-radius: 50%;
     margin-top: 25px;
@@ -72,7 +72,7 @@ body{
 }
 .nav-items:hover {
     width: 35%;
-    height: 7%;
+    height: 6%;
     /* border: black solid 1px; */
     border-radius: 50%;
     margin-top: 25px;
@@ -82,8 +82,18 @@ body{
 }
 .nav-items-logout{
     width: 35%;
-    height: 7%;
+    height: 6%;
     /* border: black solid 1px; */
+    border-radius: 50%;
+    margin-top: 280%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nav-items-logout:hover{
+    width: 35%;
+    height: 6%;
+    /* border: black solid 1px; */
+    background-color: #FC9401;
     border-radius: 50%;
     margin-top: 280%;
     margin-left: auto;
@@ -91,7 +101,7 @@ body{
 }
 .nav-items-selected{
     width: 35%;
-    height: 7%;
+    height: 6%;
     /* border: black solid 1px; */
     border-radius: 50%;
     background-color: #FC9401;
@@ -163,6 +173,13 @@ body{
     width: 100%;
     height: 100%;
     background-image: url(assets/logout.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.nav-items-logout:hover .icon-logout{
+    width: 100%;
+    height: 100%;
+    background-image: url(assets/logout-selected.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
