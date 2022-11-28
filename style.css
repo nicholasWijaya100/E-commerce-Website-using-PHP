@@ -33,6 +33,10 @@ body{
     padding-top: 10px;
 
 }
+.inversed-message{
+    color: #FC9401;
+    background-color: white;
+}
 /* Home */
 .container{
     width: 80vw;
