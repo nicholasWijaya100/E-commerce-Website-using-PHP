@@ -52,6 +52,7 @@
             </div>
             
             
+           
             
             <input type="submit" value="Login" formaction="index.php" class="login-buttons">
             <input type="submit" value="Register" name="registerBtn" class="login-buttons">
