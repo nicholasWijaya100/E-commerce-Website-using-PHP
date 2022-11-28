@@ -1,49 +1,28 @@
 <?php
-    require_once("connection.php");
-    $result = mysqli_query($conn,"SELECT * from users");
+    include("koneksi.php");
 
-    if(isset($_POST['register'])){
-        $available = true;
-        while($row = mysqli_fetch_array($result)){
-            if($_POST["username"] == $row["username"]){
-                $available = false;
-            }
-        }
-        $username = $_POST["username"];
-        $pass = $_POST["pass"];
-        $cpass = $_POST["cpass"];
-        if($username == "admin"){
-            $_SESSION["message"] = "Username tidak boleh admin.";
-            header("Location: register.php");
-            return;
-        }
+    if(isset($_POST['registerBtn'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $cpassword = $_POST['cpassword'];
 
-        if($username == "" || $pass == "" || $cpass == ""){
-            $_SESSION["message"] = "harap isi semua field yang ada.";
-            header("Location: register.php");
-        }elseif($available){
-            if($_POST["pass"] == $_POST["cpass"]){
-                $query = mysqli_query($conn, "SELECT COUNT(*) AS hitung FROM users");
-                $result = mysqli_fetch_object($query);
-                $jumlahID = $result->hitung;
-                $jumlahID++;
-                $id = "CUS";
-                if($jumlahID < 10)
-                    $id = $id . "00" . $jumlahID;
-                else if($jumlahID < 100)
-                    $id = $id . "0" . $jumlahID;
-                else
-                    $id = $id . $jumlahID;
-                mysqli_query($conn,"INSERT into users values('$id','$username','$pass',0)");
-                $_SESSION["message"] = "Berhasil register";
-                header("Location: index.php");
-            }else{
-                $_SESSION["message"] = "Confirm Password not match";
-                header("Location: register.php");
+        if($username == "" || $password == "" || $cpassword == "") {
+            $_SESSION["message"] = "Mohon isi semua field";
+        } else {
+            if($password != $cpassword) {
+                $_SESSION["message"] = "Password dan confirm password tidak sama";
+            } else {
+                $stmt = $conn->query("select * from users where username = '$username'");
+                $res = $stmt->fetch_all(MYSQLI_BOTH);
+                if(count($res) > 0) {
+                    $_SESSION["message"] = "Username sudah dipakai, silahkan pilih username lain";
+                } else {
+                    $stmt = $conn->prepare("insert into users(username, password) values(?, ?)");
+                    $stmt->bind_param("ss", $username, $password);
+                    $stmt->execute();
+                    $_SESSION["message"] = "Register Berhasil";
+                }   
             }
-        }else{
-            $_SESSION["message"] = "Username sudah terdaftar";
-            header("Location: register.php");
         }
     }
 ?>
@@ -59,10 +38,10 @@
     <form action="" method="POST">
         <h1>Register</h1>
         <p>Username : <input type="text" name="username" placeholder="Masukan username"></p>
-        <p>Password : <input type="password" name="pass" placeholder="Masukan Password"></p>
-        <p>Confirm : <input type="password" name="cpass" placeholder="Masukan Confirm Password"></p>
-        <input type="submit" value="Register" name="register">
-        <input type="submit" value="Sign Up" formaction="index.php">
+        <p>Password : <input type="password" name="password" placeholder="Masukan Password"></p>
+        <p>Confirm Password : <input type="password" name="cpassword" placeholder="Masukan Confirm Password"></p>
+        <input type="submit" value="Register" name="registerBtn">
+        <input type="submit" value="Login" formaction="index.php">
     </form>
 </body>
 </html>
