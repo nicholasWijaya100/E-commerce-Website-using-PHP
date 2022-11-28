@@ -33,15 +33,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="" method="POST">
-        <h1>Register</h1>
-        <p>Username : <input type="text" name="username" placeholder="Masukan username"></p>
-        <p>Password : <input type="password" name="password" placeholder="Masukan Password"></p>
-        <p>Confirm Password : <input type="password" name="cpassword" placeholder="Masukan Confirm Password"></p>
-        <input type="submit" value="Register" name="registerBtn">
-        <input type="submit" value="Login" formaction="index.php">
-    </form>
+    <div class="login-card regis-tall">
+        <form action="" method="POST">
+
+            
+            <h1>Register</h1>
+            <div class="form-rows">
+                <input type="text" name="username" placeholder="Masukan username" class= "text-input">
+            </div>
+            <div class="form-rows">
+                <input type="password" name="password" placeholder="Masukan Password" class= "text-input">
+            </div>
+            <div class="form-rows">
+            <input type="password" name="cpassword" placeholder="Masukan Confirm Password" class= "text-input">
+            </div>
+            
+           
+            
+            <input type="submit" value="Login" formaction="index.php" class="login-buttons">
+            <input type="submit" value="Register" name="registerBtn" class="login-buttons">
+
+        </form>
+    </div>
 </body>
 </html>

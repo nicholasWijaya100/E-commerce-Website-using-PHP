@@ -327,13 +327,14 @@ body{
 
 /* Index */
 .login-card{
-    width: 40vw;
-    height: 40vh;
+    width: 45vw;
+    height: 55vh;
     margin-top: 20vh;
-    border-radius: 30px;
+    border-radius: 10vmin;
     background-color: #F9F9FB;
     margin-left: auto;
     margin-right: auto;
+    overflow-y: auto;
 }
 .login-card h1{
     text-align: center;
@@ -370,4 +371,9 @@ body{
     color: #FC9401;
     border-radius: 20px;
     float: right;
+}
+/* Register */
+.regis-tall{
+    margin-top: 15vh;
+    height: 65vh;
 }
