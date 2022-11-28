@@ -15,13 +15,24 @@ body{
 
 .form-rows{
     width: 60%;
-    height: 40px;
+    height: 35px;
     border-radius: 30px;
-    margin-top: 40px;
+    margin-top: 35px;
     margin-left: auto;
     margin-right: auto;
 }
+.message-box{
+    color: white;
+    width: 60%;
+    height: 30px;
+    background-color: #FC9401;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    text-indent: 10px;
+    padding-top: 10px;
 
+}
 /* Home */
 .container{
     width: 80vw;
@@ -193,7 +204,7 @@ body{
 }
 
 .top .title{
-    width: 30%;
+    width: 60%;
     height: 99%;
     padding-top: 1%;
     font-size: 1.5em;
@@ -203,10 +214,10 @@ body{
 .searchbar-container{
     width: 45%;
     height: 100%;
-    margin-left: 15%;
     border-radius: 30px;
     display: flex;
     background-color: white;
+    margin-right: 5%;
 }
 .searchbar{
     width: 95%;
@@ -327,13 +338,14 @@ body{
 
 /* Index */
 .login-card{
-    width: 40vw;
-    height: 40vh;
+    width: 45vw;
+    height: 55vh;
     margin-top: 20vh;
-    border-radius: 30px;
+    border-radius: 10vmin;
     background-color: #F9F9FB;
     margin-left: auto;
     margin-right: auto;
+    overflow-y: auto;
 }
 .login-card h1{
     text-align: center;
@@ -349,7 +361,7 @@ body{
 }
 .login-buttons:hover{
     width: 15%;
-    margin-top: 50px;
+    margin-top: 40px;
     height: 40px;
     border: none;
     font-weight: bold;
@@ -362,7 +374,7 @@ body{
 .login-buttons{
     font-weight: bold;
     width: 15%;
-    margin-top: 50px;
+    margin-top: 40px;
     height: 40px;
     border: none;
     background-color: white;
@@ -370,4 +382,9 @@ body{
     color: #FC9401;
     border-radius: 20px;
     float: right;
+}
+/* Register */
+.regis-tall{
+    margin-top: 15vh;
+    height: 65vh;
 }
