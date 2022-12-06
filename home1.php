@@ -10,32 +10,39 @@
 <body>
     <div class="container">
         <div class="left-navbar">
-    
+
+            <a href="index.php">
             <div class="nav-items-selected">
                 <div class="items-icon">
                     <div class="icon-home-selected"></div>
                 </div>
             </div>
+            </a>
             
+            <a href="index.php">
             <div class="nav-items">
                 <div class="items-icon">
                     <div class="icon-wallet"></div>
                 </div>
             </div>
+            </a>
             
+            <a href="index.php">
             <div class="nav-items">
                 <div class="items-icon">
                     <div class="icon-trans"></div>
                 </div>
             </div>
+            </a>
     
     
-    
+            <a href="index.php">
             <div class="nav-items-logout">
                 <div class="items-icon">
                     <div class="icon-logout"></div>
                 </div>
             </div>
+            </a>
     
                 
             
