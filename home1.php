@@ -1,4 +1,14 @@
+<?php 
+    require_once("koneksi.php");
 
+    $currentUser = "-";
+
+    if(isset($_SESSION['loggedUser'])){
+        $currentUser = $_SESSION['loggedUser'];
+
+    }
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -60,7 +70,7 @@
 
             <div class="banner">
                 <div class="welcome-text">
-                    <h2>Welcome, Timothy Johan</h2><br>
+                    <h2>Welcome, <?= $currentUser ?> </h2><br>
                     <h4>Please check our latest offers</h4>
                 </div>
             </div>

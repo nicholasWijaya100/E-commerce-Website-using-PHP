@@ -1,24 +1,29 @@
 <?php
     include("koneksi.php");
+    $complete = true;
+    $exist = true;
+    $correct = true;
 
     if(isset($_POST['loginBtn'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        
         if($username == "admin" && $password = "admin") {
-            header("Location: adminFood.php");
+            header("Location: admin.php");
         } else if($username == "" || $password == "") {
+            $complete = false;
             $_SESSION["message"] = "Mohon isi semua field";
         } else {
             $stmt = $conn->query("select * from users where username='$username'");
             $res = $stmt->fetch_all(MYSQLI_BOTH);
             if(count($res) == 0) {
                 $_SESSION["message"] = "Username tidak ditemukan";
+                $exist = false;
             } else {
                 if($password != $res[0]['password']) {
                     $_SESSION["message"] = "Password Salah";
+                    $correct = false;
                 } else {
-                    $_SESSION['loggedUser'] = $res[0];
+                    $_SESSION['loggedUser'] = $res[0]['username'];
                     header("location: home1.php");
                 }
             }
@@ -45,6 +50,13 @@
             <div class="form-rows">
                 <input type="password" name="password" placeholder="Password" class="text-input">
             </div>
+            <?php 
+                if(!$complete) echo '<div class="message-box">Mohon isi semua field</div>';
+                elseif(!$exist) echo '<div class="message-box">Username tidak ditemukan</div>';
+                elseif(!$correct) echo '<div class="message-box">Password Salah</div>';
+
+            ?>
+            
             <input type="submit" name="loginBtn" value="Login" class="login-buttons">
             <input type="submit" formaction="register.php" value="Register" class="login-buttons">
         </form>
