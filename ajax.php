@@ -237,6 +237,16 @@
         $menuId = $_POST['menuId'];
         $stmt = $conn->query("delete from menu where menu_id = '$menuId'");
     }
+
+    if($_POST['jenis'] == "editMenu") {
+        $menuId = $_POST['menuId'];
+        $menuName = $_POST['menuName'];
+        $menuCategory = $_POST['menuCategory'];
+        $menuPrice = $_POST['menuPrice'];
+        $menuStock = $_POST['menuStock'];
+        $stmt = $conn->query("update menu set menu_kategori_id = '$menuCategory', menu_name = '$menuName', menu_price = '$menuPrice', menu_stok = '$menuStock' where menu_id = '$menuId'");
+    }
+
     if($_POST['jenis'] == "deleteCart"){
         $id = $_POST['id'];
         unset($_SESSION['cart'][$id]);
