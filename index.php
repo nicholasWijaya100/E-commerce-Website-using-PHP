@@ -8,7 +8,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         if($username == "admin" && $password = "admin") {
-            header("Location: admin.php");
+            header("Location: adminAddFood.php");
         } else if($username == "" || $password == "") {
             $complete = false;
             $_SESSION["message"] = "Mohon isi semua field";
