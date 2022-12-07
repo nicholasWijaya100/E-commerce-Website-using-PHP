@@ -24,7 +24,7 @@
                     $correct = false;
                 } else {
                     $_SESSION['loggedUser'] = $res[0]['username'];
-                    header("location: home1.php");
+                    header("location: homeMenu.php");
                 }
             }
         }
