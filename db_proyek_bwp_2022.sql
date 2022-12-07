@@ -90,7 +90,7 @@ INSERT  INTO `menu`(`menu_id`, `menu_kategori_id`,`menu_name`, `menu_price`, `me
 (18, 3, 'Es Campur Betawi', 26000, 19, 'es_campur_betawi.jpg'),
 (19, 3, 'Es Teh Manis', 12000, 50, 'es_teh_manis.jpg'),
 (20, 3, 'Es Teh Tawar', 12000, 34, 'es_teh_manis.jpg'),
-(21, 3, 'Kopi Luwak', 24000, 10, 'kopi_luwak_webp'),
+(21, 3, 'Kopi Luwak', 24000, 10, 'kopi_luwak.webp'),
 (22, 3, 'Arak Bali', 20000, 7, 'arak_bali.jpg'),
 (23, 3, 'Es Kelapa Muda', 24000, 11, 'es_kelapa_mudah.jpg'),
 (24, 2, 'Gado-gado', 45000, 13, 'gado_gado.webp'),
