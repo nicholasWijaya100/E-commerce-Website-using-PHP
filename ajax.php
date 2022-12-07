@@ -192,11 +192,54 @@
             }
         }
     }
+    if($_POST['jenis'] == "fetchCart"){
+        // Header
+        echo"<div style='width: 100%;' class='mb-5 h3'>Cart</div>";
+        echo"
+            <table class='table'>
+                <tr>
+                    <th class='col'>No.</th>
+                    <th class='col'>Nama Menu</th>
+                    <th class='col'>Quantity</th>
+                    <th class='col'>Harga</th>
+                    <th class='col'>Subtotal</th>
+                    <th class='col'></th>
+                </tr>
+        ";
+
+        // Items
+        $total = 0;
+        foreach($_SESSION['cart'] as $i => $x){
+            $item = mysqli_fetch_array(mysqli_query($conn, "select * from menu where menu_id = '".$x['id']."'"));
+            $total += $x['qty']*$item['menu_price'];
+            echo "
+                <tr>
+                    <td>".($i+1)."</td>
+                    <td>".$item['menu_name']."</td>
+                    <td>".$x['qty']."</td>
+                    <td>".$item['menu_price']."</td>
+                    <td>".$x['qty']*$item['menu_price']."</td>
+                    <td><button type='button' id='$i' onclick='deleteCart(this.id)' name='deleteButton' class='btn btn-primary'>Delete</button></td>
+                </tr>
+            ";
+        }
+
+        // Grand Total
+        echo "<tr>
+        <td colspan='4'><b>Grand Total : </b></td>
+        <td colspan='1'><b>$total</b></td>
+        <td colspan='1'><button type='button' id='$i' onclick='temp(this.id)' name='temp' class='btn btn-primary'>Payment</button></td><tr>";
+        echo"</table>";
+    }
     
 
     if($_POST['jenis'] == "deleteMenu"){
         $menuId = $_POST['menuId'];
         $stmt = $conn->query("delete from menu where menu_id = '$menuId'");
+    }
+    if($_POST['jenis'] == "deleteCart"){
+        $id = $_POST['id'];
+        unset($_SESSION['cart'][$id]);
     }
     if($_POST['jenis'] == "addCart"){
         $menuId = $_POST['menuId'];
