@@ -81,7 +81,7 @@
         </div>
     </div>
     <div>
-        <button class='btn btn-success me-1'>Edit</button>
+        <button class='btn btn-success me-1' onclick='editMenu()'>Edit</button>
         <button class='btn btn-danger' onclick='closePopUp()'>Close</button>
     </div>
 </div>
@@ -89,6 +89,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="jquery.js"></script>
 <script>
+    let currentEditId = -1;
     function fetch_menu_appetizer() {
         let r = new XMLHttpRequest();
         let appetizer_container = document.getElementById("appetizer_container");
@@ -156,7 +157,8 @@
         fetch_menu_desert();
     }
 
-    function openMenuEditor() {
+    function openMenuEditor(id) {
+        currentEditId = id.substr(6);
         let menuContainer = document.getElementById("menu-container");
         menuContainer.style.opacity = "50%";
 
@@ -172,6 +174,10 @@
         let popUp = document.getElementById("popUpMenuEditor");
         popUp.style.visibility = "hidden";
         popUp.style.display = "none";
+    }
+
+    function editMenu() {
+        closePopUp();
     }
 
     function deleteMenu(id) {
