@@ -9,7 +9,7 @@
     <title>Master Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body id='body' style="background-color: #DAE0E6; color: black" onload='initPage()'>
+<body style="background-color: #DAE0E6; color: black" onload='initPage()'>
     <nav class="navbar navbar-expand-sm px-3" style="background-color: white;">
         <div class="container-fluid">
             <img class="navbar-brand" src="assets/logo.png" height="65">
