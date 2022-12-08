@@ -1,5 +1,9 @@
 <?php
     include("koneksi.php");
+
+    if(!isset($_SESSION['cart'])) {
+        $_SESSION["cart"] = [];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,38 +54,7 @@
         </div>
     </div>
 </body>
-<div id='popUpMenuEditor' class="p-5 rounded-lg mx-auto" style="width: 50%; position: fixed; display: none; visibility: hidden; top: 25%; left: 25%; color: white; background-color: #A074C4;">
-    <div><h4><strong>Edit Makanan</strong></h4></div>
-    <div class="mb-3 mt-5">
-        <input type="text" class="form-control input-lg" name="nameInput" placeholder="Insert food name here">
-    </div>
-    <div class="mb-3">
-        <select name="categoryInput" style="color: #6C84A7;" class="form-select" aria-label="Default select example">
-            <option value="" selected hidden disabled>Select Food Category</option>
-            <?php
-                $stmt = $conn->query("select * from kategori");
-                $res = $stmt->fetch_all(MYSQLI_BOTH);
-                foreach($res as $idx => $kategori_combo_item) {
-                    $kategori_id = $kategori_combo_item['kategori_id'];
-                    $kategori_name = $kategori_combo_item['kategori_name'];
-                    echo"<option value='$kategori_id'>$kategori_name</option>";
-                }
-            ?>
-        </select>
-    </div>
-    <div class="row mb-3">
-        <div class="col-6">
-            <input type="number" class="form-control input-lg" name="priceInput" placeholder="Insert food price here">
-        </div>
-        <div class="col-6">
-            <input type="number" class="form-control input-lg" name="stockInput" placeholder="Insert food stock here">
-        </div>
-    </div>
-    <div>
-        <button class='btn btn-success me-1'>Edit</button>
-        <button class='btn btn-danger' onclick='closePopUp()'>Close</button>
-    </div>
-</div>
+
 <!-- Alert "Successfully added to cart!" -->
 <div class="alert alert-success fixed-bottom d-none" role="alert" id="success-alert">
     Successfully added to cart!
@@ -162,6 +135,8 @@
         // Add Cart Ajax
         let r = new XMLHttpRequest();
         let menuId = id.substr(6);
+        let quantityInput = document.getElementById("quantityInput" + menuId);
+        let quantity = quantityInput.value;
 
         r.onreadystatechange = function() {
             if ((this.readyState==4) && (this.status==200)) {
@@ -171,7 +146,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=addCart&menuId=${menuId}`);
+        r.send(`jenis=addCart&menuId=${menuId}&qty=${quantity}`);
 
         // Success Alert
         $("#success-alert").removeClass("d-none");
