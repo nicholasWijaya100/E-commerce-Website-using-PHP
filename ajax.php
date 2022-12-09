@@ -301,7 +301,7 @@
         }
     }
     if($_POST['jenis'] == "midtranspayment") {
-        $htrans_user_id = $_SESSION['loggedUser']['user_id'];
+        $htrans_user_id = $_SESSION['loggedUser'][0]['user_id'];
         $htrans_tanggal_transaksi = date('Y-m-d');
         $htrans_total = $_SESSION['subtotal'];
         $htrans_status = 1;
@@ -310,5 +310,20 @@
         $stmt = $conn->prepare("insert into htrans(htrans_user_id, htrans_tanggal_transaksi, htrans_total, htrans_status) values(?, ?, ?, ?)");
         $stmt->bind_param("ssss", $htrans_user_id, $htrans_tanggal_transaksi, $htrans_total, $htrans_status);
         $stmt->execute();
+
+        $stmt = $conn->query("SELECT htrans_id FROM htrans ORDER BY htrans_id DESC LIMIT 1");
+        $res = $stmt->fetch_all(MYSQLI_BOTH);
+        $dtrans_htrans_id = $res[0]['htrans_id'];
+
+        $cart = $_SESSION['cart']; 
+        foreach($cart as $idx => $item) {
+            $dtrans_menu_id = $cart[$idx]['id'];
+            $dtrans_price = intval($cart[$idx]['price']);
+            $dtrans_quantity = intval($cart[$idx]['qty']);
+            $dtrans_total = $dtrans_price * $dtrans_quantity;
+            $stmt = $conn->prepare("insert into dtrans(dtrans_htrans_id, dtrans_menu_id, dtrans_quantity, dtrans_subtotal) values(?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $dtrans_htrans_id, $dtrans_menu_id, $dtrans_quantity, $dtrans_total);
+            $stmt->execute();
+        }
     }
 ?>

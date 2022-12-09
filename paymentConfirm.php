@@ -96,6 +96,7 @@ echo "snapToken = ".$snapToken;
 
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-fpV1lhauqTXPWRpZ"></script>
+    <script src="jquery.js"></script>
     <script type="text/javascript">
       document.getElementById('pay-button').onclick = function(){
         // SnapToken acquired from previous step
@@ -125,8 +126,15 @@ echo "snapToken = ".$snapToken;
       };
 
       function midtranspayment() {
+        $.post("ajax.php",
+               { jenis: 'midtranspayment' },
+               function(result) {
+                 alert(result); 
+               }
+             );
         let r = new XMLHttpRequest();
 
+        /*
         r.onreadystatechange = function() {
             if ((this.readyState==4) && (this.status==200)) {
                 alert("Transaksi Berhasil");
@@ -136,6 +144,7 @@ echo "snapToken = ".$snapToken;
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         r.send(`jenis=midtranspayment`);
+        */
       }
      </script>
   </body>

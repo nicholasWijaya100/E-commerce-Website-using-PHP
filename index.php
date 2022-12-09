@@ -23,7 +23,7 @@
                     $_SESSION["message"] = "Password Salah";
                     $correct = false;
                 } else {
-                    $_SESSION['loggedUser'] = $res[0];
+                    $_SESSION['loggedUser'] = $res;
                     header("location: homeMenu.php");
                 }
             }
