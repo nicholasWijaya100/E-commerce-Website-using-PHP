@@ -17,9 +17,12 @@
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
                     echo"<div class='card-body'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
-                        echo"<div class='card-text'>Price: Rp.$menu_price</div>";
-                        echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</a>";
+                        echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
+                        echo"<div class='row mb-2'>";
+                        echo"<div class='col-6 fs-5'>Quantity: </div>";
+                        echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                        echo"</div>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -40,9 +43,12 @@
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
                     echo"<div class='card-body'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
-                        echo"<div class='card-text'>Price: Rp.$menu_price</div>";
-                        echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</a>";
+                        echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
+                        echo"<div class='row mb-2'>";
+                        echo"<div class='col-6 fs-5'>Quantity: </div>";
+                        echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                        echo"</div>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -63,9 +69,12 @@
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
                     echo"<div class='card-body'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
-                        echo"<div class='card-text'>Price: Rp.$menu_price</div>";
-                        echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</a>";
+                        echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
+                        echo"<div class='row mb-2'>";
+                        echo"<div class='col-6 fs-5'>Quantity: </div>";
+                        echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                        echo"</div>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -86,9 +95,12 @@
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
                     echo"<div class='card-body'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
-                        echo"<div class='card-text'>Price: Rp.$menu_price</div>";
-                        echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</a>";
+                        echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
+                        echo"<div class='row mb-2'>";
+                        echo"<div class='col-6 fs-5'>Quantity: </div>";
+                        echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                        echo"</div>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -228,7 +240,12 @@
         echo "<tr>
         <td colspan='4'><b>Grand Total : </b></td>
         <td colspan='1'><b>$total</b></td>
-        <td colspan='1'><button type='button' id='$i' onclick='temp(this.id)' name='temp' class='btn btn-primary'>Payment</button></td><tr>";
+        <td colspan='1'>
+            <form method='post' action='paymentConfirm.php'>
+            <button type='submit' name='temp' class='btn btn-primary'>Payment</button>
+            </form>
+        </td>
+        <tr>";
         echo"</table>";
     }
     
@@ -237,15 +254,29 @@
         $menuId = $_POST['menuId'];
         $stmt = $conn->query("delete from menu where menu_id = '$menuId'");
     }
+
+    if($_POST['jenis'] == "editMenu") {
+        $menuId = $_POST['menuId'];
+        $menuName = $_POST['menuName'];
+        $menuCategory = $_POST['menuCategory'];
+        $menuPrice = $_POST['menuPrice'];
+        $menuStock = $_POST['menuStock'];
+        $stmt = $conn->query("update menu set menu_kategori_id = '$menuCategory', menu_name = '$menuName', menu_price = '$menuPrice', menu_stok = '$menuStock' where menu_id = '$menuId'");
+    }
+
     if($_POST['jenis'] == "deleteCart"){
         $id = $_POST['id'];
         unset($_SESSION['cart'][$id]);
     }
     if($_POST['jenis'] == "addCart"){
         $menuId = $_POST['menuId'];
-        if(!isset($_SESSION["cart"])){
-            $_SESSION["cart"] = [];
-        }
+        $qty = $_POST['qty'];
+
+        $stmt = $conn->query("select menu_name, menu_price from menu where menu_id = '$menuId'");
+        $res = $stmt->fetch_all(MYSQLI_BOTH);
+        $price = $res[0]['menu_price'];
+        $name = $res[0]['menu_name'];
+
         $cartIndex = -1;
         foreach($_SESSION["cart"] as $i => $x){
             if($x["id"] == $menuId){
@@ -257,14 +288,27 @@
             // Belum ada di cart
             $newItem = array(
                 'id' => $menuId,
-                'qty' => 1
+                'qty' => intval($qty),
+                'price' => intval($price),
+                'namaproduk' => $name
             );
 
             $_SESSION["cart"][] = $newItem;
         }
         else{
             // Sudah ada di cart
-            $_SESSION["cart"][$cartIndex]["qty"] ++;
+            $_SESSION["cart"][$cartIndex]["qty"] += $qty;
         }
+    }
+    if($_POST['jenis'] == "midtranspayment") {
+        $htrans_user_id = $_SESSION['loggedUser']['user_id'];
+        $htrans_tanggal_transaksi = date('Y-m-d');
+        $htrans_total = $_SESSION['subtotal'];
+        $htrans_status = 1;
+
+        //$stmt = $conn->query("insert into htrans(htrans_user_id, htrans_tanggal_transaksi, htrans_total, htrans_status) values($htrans_user_id, $htrans_tanggal_transaksi, $htrans_total, $htrans_status)");
+        $stmt = $conn->prepare("insert into htrans(htrans_user_id, htrans_tanggal_transaksi, htrans_total, htrans_status) values(?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $htrans_user_id, $htrans_tanggal_transaksi, $htrans_total, $htrans_status);
+        $stmt->execute();
     }
 ?>
