@@ -203,6 +203,60 @@
                 echo"</div>";
             }
         }
+
+        if($_POST['jenis'] == "fetchLaporan"){
+            $stmt = $conn->query("select * from htrans left join users on htrans.htrans_user_id = users.user_id");
+            $res = $stmt->fetch_all(MYSQLI_BOTH);
+            echo "<h2><strong>Laporan</strong></h2>";
+            foreach($res as $idx => $laporan){
+                echo '<div class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto mt-5 rounded" style="width: 100%;">';
+                // Header
+                echo"
+                    <h4>".$laporan['username']." - ".$laporan['htrans_tanggal_transaksi']."</h4>
+                    <table class='table'>
+                        
+                        <tr>
+                            <th class='col'>No.</th>
+                            <th class='col'>Nama Menu</th>
+                            <th class='col'>Quantity</th>
+                            <th class='col'>Subtotal</th>
+                            <th class='col'></th>
+                        </tr>
+                ";
+
+                // Items 
+                $total = 0;
+                $totalqty = 0;
+                $i = 0;
+                $stmta = $conn->query("select * from dtrans left join menu on dtrans.dtrans_menu_id = menu.menu_id where dtrans_htrans_id=".$laporan['htrans_id']);
+                $resa = $stmta->fetch_all(MYSQLI_BOTH);
+                foreach($resa as $idxa => $laporana){
+                    echo "
+                        <tr>
+                            <td>".($i+1)."</td>
+                            <td>".$laporana['menu_name']."</td>
+                            <td>".$laporana['dtrans_quantity']."</td>
+                            <td>".$laporana['dtrans_subtotal']."</td>
+                            
+                        </tr>
+                    ";
+                    $i ++;
+                    $total += $laporana['dtrans_subtotal'];
+                    $totalqty += $laporana['dtrans_quantity'];
+                }
+                echo "<tr>
+                <td colspan='2'><b>Grand Total : </b></td>
+                <td colspan='1'><b>$totalqty</b></td>
+                <td colspan='1'><b>$total</b></td>
+                <tr>";
+                echo '</table>';
+
+                echo '</div>';
+                
+            }
+
+       
+        }
     }
     if($_POST['jenis'] == "fetchCart"){
         // Header
