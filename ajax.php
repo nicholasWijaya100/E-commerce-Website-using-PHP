@@ -205,14 +205,31 @@
         }
 
         if($_POST['jenis'] == "fetchLaporan"){
-            $stmt = $conn->query("select * from htrans left join users on htrans.htrans_user_id = users.user_id");
-            $res = $stmt->fetch_all(MYSQLI_BOTH);
+            $startDate = $_POST['startDate'];
+            $endDate = $_POST['endDate'];
+            if($startDate == '' || $endDate == '') {
+                $startDate = '2022-12-01';
+                $endDate = '2022-12-31';
+            }
             echo "<h2><strong>Laporan</strong></h2>";
+            echo"<div class='row'>";
+                echo"<div class='col-1'></div>";
+                echo"<div class='col-4'>";
+                    echo"From Date: <input id='startDate' class='form-control' type='date' value='$startDate'  onchange='fetch_laporan_isi_refresh()'>";
+                echo"</div>"; 
+                echo"<div class='col-2'></div>";
+                echo"<div class='col-4'>";
+                    echo"To Date: <input id='endDate' class='form-control' type='date'  value='$endDate' onchange='fetch_laporan_isi_refresh()'>";
+                echo"</div>";
+                echo"<div class='col-1'></div>";
+            echo"</div>";
+            $stmt = $conn->query("select * from htrans left join users on htrans.htrans_user_id = users.user_id where htrans_tanggal_transaksi between '$startDate' and '$endDate'");
+            $res = $stmt->fetch_all(MYSQLI_BOTH);
             foreach($res as $idx => $laporan){
                 echo '<div class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto mt-5 rounded" style="width: 100%;">';
                 // Header
                 echo"
-                    <h4>".$laporan['username']." - ".$laporan['htrans_tanggal_transaksi']."</h4>
+                    <h4>".$laporan['username']." | ".$laporan['htrans_tanggal_transaksi']."</h4>
                     <table class='table'>
                         
                         <tr>
@@ -250,12 +267,16 @@
                 <td colspan='1'><b>$total</b></td>
                 <tr>";
                 echo '</table>';
-
                 echo '</div>';
-                
             }
 
-       
+            //Total Penhasilan Periode
+            $stmt = $conn->query("select sum(htrans.htrans_total) as 'final' from htrans left join users on htrans.htrans_user_id = users.user_id where htrans_tanggal_transaksi between '$startDate' and '$endDate'");
+            $res = $stmt->fetch_all(MYSQLI_BOTH);
+            $total = $res[0]['final'];
+            echo '<div class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto mt-5 rounded" style="width: 100%;">';
+                echo"Pendapatan mulai tanggal ($startDate) sampai tanggal ($endDate) =  <b>Rp.$total</b>";
+            echo "</div>";
         }
     }
     if($_POST['jenis'] == "fetchCart"){
