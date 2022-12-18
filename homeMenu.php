@@ -39,6 +39,25 @@
         </div>
     </nav>
     <div id='menu-container' class="py-5 rounded-lg mx-auto" style="width: 70%;">
+        <!-- Filters -->
+        <h2><strong>Filters</strong></h2>
+        <div id="filter_container" class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto mt-5" style="width: 100%;">
+        <input type="radio" id="rbNama" name="rbSearch" value="nama" checked onclick="checkRb(value)"> Nama 
+        <input type="radio" id="rbKategori" name="rbSearch" value="kategori" onclick="checkRb(value)"> Kategori  
+        <input type="radio" id="rbHarga" name="rbSearch" value="harga" onclick="checkRb(value)"> Harga  
+        <br>
+        <input type="text" id="searchNama" placeholder="Search Menu By Nama">
+        <select name="kategori_id" id="cbKategori" style="visibility: hidden;">\
+            <option value="Semua">Semua</option>
+            <option value="1">Appetizer</option>
+            <option value="2">Main Course</option>
+            <option value="3">Drinks</option>
+            <option value="4">Desert</option>
+        </select>
+        <input type="text" id="searchHarga" placeholder="Search Menu By Harga" style="visibility: hidden;">
+        </div>
+
+        <!-- Menu -->
         <h2><strong>Menu</strong></h2>
         <div id="appetizer_container" class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto mt-5" style="width: 100%;">
             
@@ -63,6 +82,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="jquery.js"></script>
 <script>
+    searchNama = document.getElementById("searchNama");
+    searchHarga = document.getElementById("searchHarga");
+    cbKategori = document.getElementById("cbKategori");
+
+    rbNama = document.getElementById("rbNama");
+    rbKategori = document.getElementById("rbKategori");
+    rbHarga = document.getElementById("rbHarga");
+    
+    hasilSearch = "";
+    hasilCb = "Semua";
+    cekHarga = 0;
+
     function fetch_menu_appetizer() {
         let r = new XMLHttpRequest();
         let appetizer_container = document.getElementById("appetizer_container");
@@ -75,7 +106,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuAppetizer&isHome=true`);
+        r.send(`jenis=fetchMenuAppetizer&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
     }
 
     function fetch_menu_main_course() {
@@ -90,7 +121,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuMainCourse&isHome=true`);
+        r.send(`jenis=fetchMenuMainCourse&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
     }
     
     function fetch_menu_drinks() {
@@ -105,7 +136,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuDrinks&isHome=true`);
+        r.send(`jenis=fetchMenuDrinks&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
     }
 
     function fetch_menu_desert() {
@@ -120,7 +151,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuDesert&isHome=true`);
+        r.send(`jenis=fetchMenuDesert&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
     }
 
     function initPage() {
@@ -186,5 +217,59 @@
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         r.send(`jenis=deleteMenu&menuId=${menuId}`);
+    }
+
+    // Filter Functions
+    
+
+    function fetchMenu(){
+        fetch_menu_appetizer();
+        fetch_menu_main_course();
+        fetch_menu_drinks();
+        fetch_menu_desert();
+    }
+    
+    searchNama.oninput = function (){
+        hasilSearch = document.getElementById("searchNama").value;
+        fetchMenu();
+    };
+    searchHarga.oninput = function (){
+        if(!isNaN(searchHarga.value)){
+            cekHarga = document.getElementById("searchHarga").value;
+            fetchMenu();
+        }
+    };
+
+    function checkRb(value){
+        if(value == "nama"){
+            reset();
+            document.getElementById("searchNama").style.visibility="visible";
+            document.getElementById("cbKategori").style.visibility="hidden";
+            document.getElementById("searchHarga").style.visibility="hidden";
+        }else if(value == "kategori"){
+            reset();
+            document.getElementById("searchNama").style.visibility="hidden";
+            document.getElementById("cbKategori").style.visibility="visible";
+            document.getElementById("searchHarga").style.visibility="hidden";
+        }else if(value == "harga"){
+            reset();
+            document.getElementById("searchNama").style.visibility="hidden";
+            document.getElementById("cbKategori").style.visibility="hidden";
+            document.getElementById("searchHarga").style.visibility="visible";
+        }
+    }
+
+    function reset(){
+        hasilSearch = "";
+        hasilCb = "Semua";
+        cekHarga = 0;
+        document.getElementById("searchNama").value = "";
+        document.getElementById("searchHarga").value = 0;
+        fetchMenu();
+    }
+
+    cbKategori.onchange = (ev) =>{
+        hasilCb = cbKategori.options[cbKategori.selectedIndex].value;
+        fetchMenu();
     }
 </script>
