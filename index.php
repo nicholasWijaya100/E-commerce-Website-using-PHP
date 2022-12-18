@@ -1,5 +1,6 @@
 <?php
     include("koneksi.php");
+    unset($_SESSION['cart']);
     $complete = true;
     $exist = true;
     $correct = true;

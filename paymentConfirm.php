@@ -17,7 +17,9 @@ Veritrans_Config::$is3ds = true;
   $subtotal = 0; 
   $cart = $_SESSION['cart']; 
   for($i = 0; $i < count($cart); $i++) {
-    $subtotal = $subtotal + ($cart[$i]['price'] * $cart[$i]['qty']); 
+    if(isset($cart[$i])) {
+      $subtotal = $subtotal + ($cart[$i]['price'] * $cart[$i]['qty']);
+    } 
   }
   $_SESSION['subtotal'] = $subtotal;
 
@@ -30,11 +32,13 @@ $transaction_details = array(
 $arrmidtrans = []; 
 $cart = $_SESSION['cart']; 
 for($i = 0; $i < count($cart); $i++) {
-  $arrmidtrans[$i] = []; 
-  $arrmidtrans[$i]['id'] = $cart[$i]['id'];
-  $arrmidtrans[$i]['price'] = $cart[$i]['price'];
-  $arrmidtrans[$i]['quantity'] = $cart[$i]['qty'];
-  $arrmidtrans[$i]['name'] = $cart[$i]['namaproduk'];
+  if(isset($cart[$i])) {
+    $arrmidtrans[$i] = []; 
+    $arrmidtrans[$i]['id'] = $cart[$i]['id'];
+    $arrmidtrans[$i]['price'] = $cart[$i]['price'];
+    $arrmidtrans[$i]['quantity'] = $cart[$i]['qty'];
+    $arrmidtrans[$i]['name'] = $cart[$i]['namaproduk'];
+  }
 }
 
 
@@ -85,20 +89,17 @@ $transaction = array(
 );
 
 $snapToken = Veritrans_Snap::getSnapToken($transaction);
-echo "snapToken = ".$snapToken;
 ?>
 
 <!DOCTYPE html>
 <html>
-  <body>
-    <button id="pay-button">Pay!</button>
-    <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre> 
+  <body onload='load()'>
 
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-fpV1lhauqTXPWRpZ"></script>
     <script src="jquery.js"></script>
     <script type="text/javascript">
-      document.getElementById('pay-button').onclick = function(){
+      function load(){
         // SnapToken acquired from previous step
         snap.pay('<?=$snapToken?>', {
           // Optional
@@ -106,20 +107,18 @@ echo "snapToken = ".$snapToken;
             console.log("success bayar "); 
             alert('success bayar midtrans'); 
             // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            document.getElementById('result-json').innerHTML = "masuk sukses";
             /* You may add your own js here, this is just example */ 
             midtranspayment();
           },
           // Optional
           onPending: function(result){
             midtranspayment();
-            document.getElementById('result-json').innerHTML = "masuk pending"; 
             // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
             /* You may add your own js here, this is just example */ 
           },
           // Optional
           onError: function(result){
-            document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+            midtranspayment();
             /* You may add your own js here, this is just example */ 
           }
         });
@@ -129,22 +128,10 @@ echo "snapToken = ".$snapToken;
         $.post("ajax.php",
                { jenis: 'midtranspayment' },
                function(result) {
-                 alert(result); 
+                window.location.replace("homeMenu.php");
                }
              );
         let r = new XMLHttpRequest();
-
-        /*
-        r.onreadystatechange = function() {
-            if ((this.readyState==4) && (this.status==200)) {
-                alert("Transaksi Berhasil");
-            }
-        }
-        
-        r.open('POST', 'ajax.php');
-        r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=midtranspayment`);
-        */
       }
      </script>
   </body>
