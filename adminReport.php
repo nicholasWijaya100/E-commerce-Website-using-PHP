@@ -80,6 +80,8 @@
     function fetch_laporan_isi(){
         let r = new XMLHttpRequest();
         let menu_container = document.getElementById("menu-container");
+        let startDate = '2022-12-01';
+        let endDate = '2022-12-31';
 
         r.onreadystatechange = function() {
             if ((this.readyState==4) && (this.status==200)) {
@@ -89,64 +91,28 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchLaporan`);
-    }
-    
-
-    function initPage() {
-        fetch_laporan_isi();
+        r.send(`jenis=fetchLaporan&endDate=${endDate}&startDate=${startDate}`);
     }
 
-    function openMenuEditor(id) {
-        currentEditId = id.substr(6);
-        let menuContainer = document.getElementById("menu-container");
-        menuContainer.style.opacity = "50%";
-
-        let popUp = document.getElementById("popUpMenuEditor");
-        popUp.style.visibility = "visible";
-        popUp.style.display = "block";
-    }
-
-    function closePopUp() {
-        let menuContainer = document.getElementById("menu-container");
-        menuContainer.style.opacity = "100%";
-
-        let popUp = document.getElementById("popUpMenuEditor");
-        popUp.style.visibility = "hidden";
-        popUp.style.display = "none";
-    }
-
-    function editMenu() {
+    function fetch_laporan_isi_refresh(){
         let r = new XMLHttpRequest();
-        let menu_name = document.getElementById("nameInput").value;
-        let menu_category = document.getElementById("categoryInput").value;
-        let menu_price = document.getElementById("priceInput").value;
-        let menu_stock = document.getElementById("stockInput").value;
+        let menu_container = document.getElementById("menu-container");
+        let startDate =  document.getElementById("startDate").value;
+        let endDate =  document.getElementById("endDate").value;
 
         r.onreadystatechange = function() {
             if ((this.readyState==4) && (this.status==200)) {
-                initPage();
-                closePopUp();
-            }
-        }
-
-        r.open('POST', 'ajax.php');
-        r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=editMenu&menuId=${currentEditId}&menuName=${menu_name}&menuCategory=${menu_category}&menuPrice=${menu_price}&menuStock=${menu_stock}`);
-    }
-
-    function deleteMenu(id) {
-        let r = new XMLHttpRequest();
-        let menuId = id.substr(6);
-
-        r.onreadystatechange = function() {
-            if ((this.readyState==4) && (this.status==200)) {
-                initPage();
+                menu_container.innerHTML = this.responseText;
             }
         }
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=deleteMenu&menuId=${menuId}`);
+        r.send(`jenis=fetchLaporan&endDate=${endDate}&startDate=${startDate}`);
+    }
+    
+
+    function initPage() {
+        fetch_laporan_isi();
     }
 </script>
