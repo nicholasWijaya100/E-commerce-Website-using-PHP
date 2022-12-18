@@ -12,14 +12,14 @@
                 if($cekHarga == 0)
                     $select_query = "select * from menu where menu_kategori_id = 1 and menu_name like '$keyword'";
                 else 
-                    $select_query = "select * from menu where menu_kategori_id = 1 and menu_price <= '$cekHarga'";
+                    $select_query = "select * from menu where menu_kategori_id = 1 and menu_price <= $cekHarga";
             else
                 $select_query = "select * from menu where menu_kategori_id = 1 and menu_kategori_id = '$hasilCb'";
 
             $stmt = $conn->query($select_query);
             $res = $stmt->fetch_all(MYSQLI_BOTH);
+            echo"<div style='width: 100%;' class='mb-5 h3'>Appetizer</div>";
             if($res){
-                echo"<div style='width: 100%;' class='mb-5 h3'>Appetizer</div>";
                 foreach($res as $idx => $menu) {
                     $menu_id = $menu['menu_id'];
                     $menu_name = $menu['menu_name'];
@@ -54,14 +54,14 @@
                 if($cekHarga == 0)
                     $select_query = "select * from menu where menu_kategori_id = 2 and menu_name like '$keyword'";
                 else 
-                    $select_query = "select * from menu where menu_kategori_id = 2 and menu_price <= '$cekHarga'";
+                    $select_query = "select * from menu where menu_kategori_id = 2 and menu_price <= $cekHarga";
             else
                 $select_query = "select * from menu where menu_kategori_id = 2 and menu_kategori_id = '$hasilCb'";
 
             $stmt = $conn->query($select_query);
             $res = $stmt->fetch_all(MYSQLI_BOTH);
+            echo"<div style='width: 100%;' class='mb-5 h3'>Main Course</div>";
             if($res){
-                echo"<div style='width: 100%;' class='mb-5 h3'>Main Course</div>";
                 foreach($res as $idx => $menu) {
                     $menu_id = $menu['menu_id'];
                     $menu_name = $menu['menu_name'];
@@ -96,14 +96,14 @@
                 if($cekHarga == 0)
                     $select_query = "select * from menu where menu_kategori_id = 3 and menu_name like '$keyword'";
                 else 
-                    $select_query = "select * from menu where menu_kategori_id = 3 and menu_price <= '$cekHarga'";
+                    $select_query = "select * from menu where menu_kategori_id = 3 and menu_price <= $cekHarga";
             else
                 $select_query = "select * from menu where menu_kategori_id = 3 and menu_kategori_id = '$hasilCb'";
 
             $stmt = $conn->query($select_query);
             $res = $stmt->fetch_all(MYSQLI_BOTH);
+            echo"<div style='width: 100%;' class='mb-5 h3'>Drinks</div>";
             if($res){
-                echo"<div style='width: 100%;' class='mb-5 h3'>Drinks</div>";
                 foreach($res as $idx => $menu) {
                     $menu_id = $menu['menu_id'];
                     $menu_name = $menu['menu_name'];
@@ -137,14 +137,14 @@
                 if($cekHarga == 0)
                     $select_query = "select * from menu where menu_kategori_id = 4 and menu_name like '$keyword'";
                 else 
-                    $select_query = "select * from menu where menu_kategori_id = 4 and menu_price <= '$cekHarga'";
+                    $select_query = "select * from menu where menu_kategori_id = 4 and menu_price <= $cekHarga";
             else
                 $select_query = "select * from menu where menu_kategori_id = 4 and menu_kategori_id = '$hasilCb'";
 
             $stmt = $conn->query($select_query);
             $res = $stmt->fetch_all(MYSQLI_BOTH);
+            echo"<div style='width: 100%;' class='mb-5 h3'>Desert</div>";
             if($res){
-                echo"<div style='width: 100%;' class='mb-5 h3'>Desert</div>";
                 foreach($res as $idx => $menu) {
                     $menu_id = $menu['menu_id'];
                     $menu_name = $menu['menu_name'];

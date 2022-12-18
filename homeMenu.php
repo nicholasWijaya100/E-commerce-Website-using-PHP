@@ -41,20 +41,23 @@
     <div id='menu-container' class="py-5 rounded-lg mx-auto" style="width: 70%;">
         <!-- Filters -->
         <h2><strong>Filters</strong></h2>
-        <div id="filter_container" class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto mt-5" style="width: 100%;">
-        <input type="radio" id="rbNama" name="rbSearch" value="nama" checked onclick="checkRb(value)"> Nama 
-        <input type="radio" id="rbKategori" name="rbSearch" value="kategori" onclick="checkRb(value)"> Kategori  
-        <input type="radio" id="rbHarga" name="rbSearch" value="harga" onclick="checkRb(value)"> Harga  
-        <br>
-        <input type="text" id="searchNama" placeholder="Search Menu By Nama">
-        <select name="kategori_id" id="cbKategori" style="visibility: hidden;">\
-            <option value="Semua">Semua</option>
-            <option value="1">Appetizer</option>
-            <option value="2">Main Course</option>
-            <option value="3">Drinks</option>
-            <option value="4">Desert</option>
-        </select>
-        <input type="text" id="searchHarga" placeholder="Search Menu By Harga" style="visibility: hidden;">
+        <div id="filter_container" class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto my-5 row" style="width: 100%;">
+            <div class='col-4 d-flex flex-row align-items-center'>
+                <div class='me-3'><input type="radio" id="rbNama" name="rbSearch" value="nama" checked onclick="checkRb(value)"> Nama</div>
+                <div class='me-3'><input type="radio" id="rbKategori" name="rbSearch" value="kategori" onclick="checkRb(value)"> Kategori</div> 
+                <div><input type="radio" id="rbHarga" name="rbSearch" value="harga" onclick="checkRb(value)"> Harga</div>
+            </div>
+            <div class='col-8'>
+                <input class="form-control input-lg" type="text" id="searchNama" placeholder="Search Menu By Nama">
+                <select name="kategori_id" id="cbKategori" class="form-select" style="visibility: hidden; display: none;">
+                    <option value="Semua">Semua</option>
+                    <option value="1">Appetizer</option>
+                    <option value="2">Main Course</option>
+                    <option value="3">Drinks</option>
+                    <option value="4">Desert</option>
+                </select>
+                <input class="form-control input-lg" type="text" id="searchHarga" placeholder="Search Menu By Harga" style="visibility: hidden; display: none;">
+            </div>
         </div>
 
         <!-- Menu -->
@@ -246,16 +249,25 @@
             document.getElementById("searchNama").style.visibility="visible";
             document.getElementById("cbKategori").style.visibility="hidden";
             document.getElementById("searchHarga").style.visibility="hidden";
+            document.getElementById("searchNama").style.display="block";
+            document.getElementById("cbKategori").style.display="none";
+            document.getElementById("searchHarga").style.display="none";
         }else if(value == "kategori"){
             reset();
             document.getElementById("searchNama").style.visibility="hidden";
             document.getElementById("cbKategori").style.visibility="visible";
             document.getElementById("searchHarga").style.visibility="hidden";
+            document.getElementById("searchNama").style.display="none";
+            document.getElementById("cbKategori").style.display="block";
+            document.getElementById("searchHarga").style.display="none";
         }else if(value == "harga"){
             reset();
             document.getElementById("searchNama").style.visibility="hidden";
             document.getElementById("cbKategori").style.visibility="hidden";
             document.getElementById("searchHarga").style.visibility="visible";
+            document.getElementById("searchNama").style.display="none";
+            document.getElementById("cbKategori").style.display="none";
+            document.getElementById("searchHarga").style.display="block";
         }
     }
 
@@ -264,7 +276,7 @@
         hasilCb = "Semua";
         cekHarga = 0;
         document.getElementById("searchNama").value = "";
-        document.getElementById("searchHarga").value = 0;
+        document.getElementById("searchHarga").value = "";
         fetchMenu();
     }
 
