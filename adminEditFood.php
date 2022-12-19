@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #DAE0E6; color: black" onload='initPage()'>
+<body onload='initPage()'>
     <nav class="navbar navbar-expand-sm px-3" style="background-color: white;">
         <div class="container-fluid">
             <img class="navbar-brand" src="assets/logo.png" height="65">
@@ -53,8 +54,8 @@
         </div>
     </div>
 </body>
-<div id='popUpMenuEditor' class="p-5 rounded-lg mx-auto" style="width: 50%; position: fixed; display: none; visibility: hidden; top: 25%; left: 25%; color: white; background-color: #A074C4;">
-    <div><h4><strong>Edit Makanan</strong></h4></div>
+<div id='popUpMenuEditor' class="p-5 rounded-lg mx-auto" style="width: 50%; position: fixed; display: none; visibility: hidden; top: 25%; left: 25%; color: white; background-color: #F9F9FB;">
+    <div><h4><strong style="color: black;">Edit Makanan</strong></h4></div>
     <div class="mb-3 mt-5">
         <input type="text" class="form-control input-lg" id="nameInput" placeholder="Insert food name here">
     </div>
@@ -81,7 +82,7 @@
         </div>
     </div>
     <div>
-        <button class='btn btn-success me-1' onclick='editMenu()'>Edit</button>
+        <button class='btn btn-success me-1 grey' onclick='editMenu()'>Edit</button>
         <button class='btn btn-danger' onclick='closePopUp()'>Close</button>
     </div>
 </div>

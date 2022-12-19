@@ -28,14 +28,14 @@
                     $menu_stok = $menu['menu_stok'];
                     echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                         echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                        echo"<div class='card-body'>";
+                        echo"<div class='card-body cream'>";
                             echo"<h5 class='card-title'>$menu_name</h5>";
                             echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
                             echo"<div class='row mb-2'>";
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
-                            echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                            echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
+                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
                         echo"</div>";
                     echo"</div>";
                 }
@@ -70,14 +70,14 @@
                     $menu_stok = $menu['menu_stok'];
                     echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                         echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                        echo"<div class='card-body'>";
+                        echo"<div class='card-body cream'>";
                             echo"<h5 class='card-title'>$menu_name</h5>";
                             echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
                             echo"<div class='row mb-2'>";
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
-                            echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                            echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
+                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
                         echo"</div>";
                     echo"</div>";
                 }
@@ -112,14 +112,14 @@
                     $menu_stok = $menu['menu_stok'];
                     echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                         echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                        echo"<div class='card-body'>";
+                        echo"<div class='card-body cream'>";
                             echo"<h5 class='card-title'>$menu_name</h5>";
                             echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
                             echo"<div class='row mb-2'>";
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
-                            echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                            echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
+                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
                         echo"</div>";
                     echo"</div>";
                 }
@@ -153,14 +153,14 @@
                     $menu_stok = $menu['menu_stok'];
                     echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                         echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                        echo"<div class='card-body'>";
+                        echo"<div class='card-body cream'>";
                             echo"<h5 class='card-title'>$menu_name</h5>";
                             echo"<div class='card-text mb-1'>Price: Rp.$menu_price</div>";
                             echo"<div class='row mb-2'>";
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
-                            echo"<div class='col-6'><input type='number' class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
+                            echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1'>Add to Cart</button>";
+                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
                         echo"</div>";
                     echo"</div>";
                 }
@@ -184,12 +184,12 @@
                 $menu_stok = $menu['menu_stok'];
                 echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                    echo"<div class='card-body'>";
+                    echo"<div class='card-body cream'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
                         echo"<div class='card-text'>Price: Rp.$menu_price</div>";
                         echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1'>Edit</a>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-primary'>Delete</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1 grey'>Edit</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-danger'>Delete</a>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -208,12 +208,12 @@
                 $menu_stok = $menu['menu_stok'];
                 echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                    echo"<div class='card-body'>";
+                    echo"<div class='card-body cream'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
                         echo"<div class='card-text'>Price: Rp.$menu_price</div>";
                         echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1'>Edit</a>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-primary'>Delete</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1 grey'>Edit</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-danger'>Delete</a>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -232,12 +232,12 @@
                 $menu_stok = $menu['menu_stok'];
                 echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                    echo"<div class='card-body'>";
+                    echo"<div class='card-body cream'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
                         echo"<div class='card-text'>Price: Rp.$menu_price</div>";
                         echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1'>Edit</a>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-primary'>Delete</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1 grey'>Edit</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-danger'>Delete</a>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -256,12 +256,12 @@
                 $menu_stok = $menu['menu_stok'];
                 echo"<div class='card me-4 mb-5' style='width: 30%;'>";
                     echo"<img src='assets/$menu_image' height='200px' width='290px' class='card-img-top' alt='...'>";
-                    echo"<div class='card-body'>";
+                    echo"<div class='card-body cream'>";
                         echo"<h5 class='card-title'>$menu_name</h5>";
                         echo"<div class='card-text'>Price: Rp.$menu_price</div>";
                         echo"<p class='card-text'>Stok: $menu_stok</p>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1'>Edit</a>";
-                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-primary'>Delete</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='openMenuEditor(this.id)' name='editButton' class='btn btn-primary me-1 grey'>Edit</a>";
+                        echo"<button type='button' id='menuId$menu_id' onclick='deleteMenu(this.id)' name='deleteButton' class='btn btn-danger'>Delete</a>";
                     echo"</div>";
                 echo"</div>";
             }
@@ -342,6 +342,9 @@
             echo "</div>";
         }
     }
+
+    
+
     if($_POST['jenis'] == "fetchCart" && isset($_SESSION['cart'])){
         // Header
         echo"<div style='width: 100%;' class='mb-5 h3'>Cart</div>";
@@ -379,8 +382,8 @@
         <td colspan='4'><b>Grand Total : </b></td>
         <td colspan='1'><b>$total</b></td>
         <td colspan='1'>
-            <form method='post' action='paymentConfirm.php'>
-            <button type='submit' name='temp' class='btn btn-primary'>Payment</button>
+            <form method='post'>
+            <button type='submit' name='temp' class='btn btn-primary' onclick='paymentConfirm()'>Payment</button>
             </form>
         </td>
         <tr>";
@@ -464,5 +467,35 @@
             $stmt->execute();
         }
         unset($_SESSION['cart']);
+    }
+    if($_POST['jenis'] == "checkCart"){
+        // Check
+        $cart = $_SESSION['cart'];
+        $checkStock = true;
+        $_SESSION["tess"] = "AA";
+
+        foreach($cart as $idx => $x){
+            
+            $select_query = "select * from menu where menu_name = '".$x['namaproduk']."'";
+            $stmt = $conn->query($select_query);
+            $res = $stmt->fetch_all(MYSQLI_BOTH);
+            if($res[0]['menu_stok'] < $x['qty']){
+                $checkStok = false;
+            }
+        }
+        if($checkStock == true){
+            echo "true";
+
+            // ilangi stock
+            foreach($cart as $idx => $x){
+                $stokakhir = $res[0]['menu_stok'] - $x['qty'];
+                $temo = $x['namaproduk'];
+                $conn->query("update menu set menu_stok = $stokakhir where menu_name = '$temo'");
+            }
+        }
+        else{
+            echo "";
+        }
+
     }
 ?>

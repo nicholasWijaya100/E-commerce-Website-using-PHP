@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #DAE0E6; color: black" onload='initPage()'>
+<body  onload='initPage()'>
     <nav class="navbar navbar-expand-sm px-3" style="background-color: white;">
         <div class="container-fluid">
             <img class="navbar-brand" src="assets/logo.png" height="65">
@@ -68,7 +69,7 @@
         </div>
     </div>
     <div>
-        <button class='btn btn-success me-1' onclick='editMenu()'>Edit</button>
+        <button class='btn btn-success me-1 grey' onclick='editMenu()'>Edit</button>
         <button class='btn btn-danger' onclick='closePopUp()'>Close</button>
     </div>
 </div>

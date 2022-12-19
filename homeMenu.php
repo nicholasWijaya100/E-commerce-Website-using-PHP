@@ -12,9 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #DAE0E6; color: black" onload='initPage()'>
-    <nav class="navbar navbar-expand-sm px-3" style="background-color: white;">
+<body onload='initPage()'>
+    <nav class="navbar navbar-expand-sm px-3"  style="background-color: white;">
         <div class="container-fluid">
             <img class="navbar-brand" src="assets/logo.png" height="65">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -171,22 +172,25 @@
         let menuId = id.substr(6);
         let quantityInput = document.getElementById("quantityInput" + menuId);
         let quantity = quantityInput.value;
-
-        r.onreadystatechange = function() {
-            if ((this.readyState==4) && (this.status==200)) {
-                initPage();
+        if(quantity > 0){
+            r.onreadystatechange = function() {
+                if ((this.readyState==4) && (this.status==200)) {
+                    initPage();
+                }
             }
-        }
-        
-        r.open('POST', 'ajax.php');
-        r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=addCart&menuId=${menuId}&qty=${quantity}`);
+            
+            r.open('POST', 'ajax.php');
+            r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            r.send(`jenis=addCart&menuId=${menuId}&qty=${quantity}`);
 
-        // Success Alert
-        $("#success-alert").removeClass("d-none");
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
+            // Success Alert
+            $("#success-alert").removeClass("d-none");
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+        
     }
 
     function openMenuEditor() {
@@ -239,6 +243,9 @@
     searchHarga.oninput = function (){
         if(!isNaN(searchHarga.value)){
             cekHarga = document.getElementById("searchHarga").value;
+            if(cekHarga == 0){
+                cekHarga = 99999999;
+            }
             fetchMenu();
         }
     };

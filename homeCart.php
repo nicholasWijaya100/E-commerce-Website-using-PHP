@@ -82,4 +82,19 @@
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         r.send(`jenis=deleteCart&id=${id}`);
     }
+    function paymentConfirm(){
+        let r = new XMLHttpRequest();
+
+        r.onreadystatechange = function() {
+            if ((this.readyState==4) && (this.status==200)) {
+                if(this.responseText == "true"){
+                    window.location.replace("paymentConfirm.php");
+                }
+            }
+        }
+        
+        r.open('POST', 'ajax.php');
+        r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        r.send(`jenis=checkCart`);
+    }
 </script>

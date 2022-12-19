@@ -12,6 +12,22 @@ body{
 
     background-color: #FFE1BB;
 }
+.cream{
+    background-color: #ffffff; 
+
+}
+.orange{
+    background-color: #FC9401; 
+
+}
+.grey{
+    background-color: #F9F9FB; 
+    color: #FC9401;
+}
+.grey:hover{
+    background-color: #FC9401; 
+    color: #F9F9FB;
+}
 
 .form-rows{
     width: 60%;
