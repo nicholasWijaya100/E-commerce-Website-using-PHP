@@ -10,6 +10,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         $cpassword = $_POST['cpassword'];
+        $fpassword = md5($password);
         
         if($username == "" || $password == "" || $cpassword == "") {
             $_SESSION["message"] = "Mohon isi semua field";
@@ -26,7 +27,7 @@
                     $exist = true;
                 } else {
                     $stmt = $conn->prepare("insert into users(username, password) values(?, ?)");
-                    $stmt->bind_param("ss", $username, $password);
+                    $stmt->bind_param("ss", $username, $fpassword);
                     $stmt->execute();
                     $_SESSION["message"] = "Register Berhasil";
                     $success = true;

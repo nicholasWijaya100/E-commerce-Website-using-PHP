@@ -7,7 +7,7 @@
 
     if(isset($_POST['loginBtn'])) {
         $username = $_POST['username'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         if($username == "admin" && $password = "admin") {
             header("Location: adminAddFood.php");
         } else if($username == "" || $password == "") {
