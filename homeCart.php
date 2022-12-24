@@ -1,5 +1,34 @@
 <?php
     include("koneksi.php");
+
+    $isLoggedIn = isset($_SESSION['loggedUser']);
+
+    // Press - LoginLogout
+    if(isset($_GET['loginLogout'])){
+
+        // If Logged In
+        if($isLoggedIn){
+            unset($_SESSION['loggedUser']);
+            header("location: homeMenu.php");
+        }// If Logged Out
+        else{
+            header("location: login.php");
+        }
+    }
+    // Set Login / Logout Text
+    $loginLogoutText = "Login";
+    if($isLoggedIn){
+        $loginLogoutText = "Logout";
+    }
+    // Press - Cart
+    if(isset($_GET['pressCart']) && $isLoggedIn){
+            header("location: homeCart.php");
+    }
+    // Set Cart Text
+    $cartText = "";
+    if($isLoggedIn){
+        $cartText = "Cart";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +37,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #DAE0E6; color: black" onload='initPage()'>
+<body style=" color: black" onload='initPage()'>
     <nav class="navbar navbar-expand-sm px-3" style="background-color: white;">
         <div class="container-fluid">
             <img class="navbar-brand" src="assets/logo.png" height="65">
@@ -22,13 +52,13 @@
             <div class="d-flex">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item me-3">
-                    <a style="color: black; text-decoration: none;" href="homeCart.php">Cart</a>
+                    <a style="color: black; text-decoration: none;" href="#"><?php echo $cartText; ?></a>
                     </li>
                     <li class="nav-item mx-3">
                     <a style="color: black; text-decoration: none;" href="homeMenu.php">Menu</a>
                     </li>
                     <li class="nav-item mx-3">
-                    <a style="color: black; text-decoration: none;" href="index.php">Logout</a>
+                    <a style="color: black; text-decoration: none;" href="homeCart.php?loginLogout=true"><?php echo $loginLogoutText;?></a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +79,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="jquery.js"></script>
 <script>
-    
+    name = "<?php echo $_SESSION['loggedUser'][0][2];?>";
 
     function initPage() {
         // onload
@@ -59,6 +89,7 @@
         let r = new XMLHttpRequest();
         let cart_container = document.getElementById("cart_container");
 
+
         r.onreadystatechange = function() {
             if ((this.readyState==4) && (this.status==200)) {
                 cart_container.innerHTML = this.responseText;
@@ -67,7 +98,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchCart`);
+        r.send(`jenis=fetchCart&cartName=`+name);
     }
     function deleteCart(id){
         let r = new XMLHttpRequest();

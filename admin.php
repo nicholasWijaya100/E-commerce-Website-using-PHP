@@ -13,7 +13,7 @@
 <body>
     <form action="" method="POST">
         <h1>Welcome, Admin</h1>
-        <input type="submit" formaction="index.php" value="Logout">
+        <input type="submit" formaction="login.php" value="Logout">
     </form>
 </body>
 </html>

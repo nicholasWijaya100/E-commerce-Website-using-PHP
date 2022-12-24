@@ -32,7 +32,7 @@
                     <a style="color: black; text-decoration: none;" href="adminReport.php">Laporan</a>
                     </li>
                     <li class="nav-item mx-3">
-                    <a style="color: black; text-decoration: none;" href="index.php">Logout</a>
+                    <a style="color: black; text-decoration: none;" href="login.php">Logout</a>
                     </li>
                 </ul>
             </div>

@@ -4,6 +4,41 @@
     if(!isset($_SESSION['cart'])) {
         $_SESSION["cart"] = [];
     }
+
+    $isLoggedIn = isset($_SESSION['loggedUser']);
+
+    // Press - LoginLogout
+    if(isset($_GET['loginLogout'])){
+
+        // If Logged In
+        if($isLoggedIn){
+            unset($_SESSION['loggedUser']);
+            $isLoggedIn = false;
+        }// If Logged Out
+        else{
+            header("location: login.php");
+        }
+    }
+    // Set Login / Logout Text
+    $loginLogoutText = "Login";
+    if($isLoggedIn){
+        $loginLogoutText = "Logout";
+    }
+    // Press - Cart
+    if(isset($_GET['pressCart']) && $isLoggedIn){
+            header("location: homeCart.php");
+    }
+    // Set Cart Text
+    $cartText = "";
+    if($isLoggedIn){
+        $cartText = "Cart";
+    }
+
+    // Set User Text
+    $userText = "";
+    if($isLoggedIn){
+        $userText = "Welcome, ".$_SESSION['loggedUser'][0]['username'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +62,13 @@
             <div class="d-flex">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item me-3">
-                    <a style="color: black; text-decoration: none;" href="homeCart.php">Cart</a>
+                    <a style="color: black; text-decoration: none;" href="homeMenu.php?pressCart=true"><?php echo $cartText; ?></a>
                     </li>
                     <li class="nav-item mx-3">
                     <a style="color: black; text-decoration: none;" href="homeMenu.php">Menu</a>
                     </li>
                     <li class="nav-item mx-3">
-                    <a style="color: black; text-decoration: none;" href="index.php">Logout</a>
+                    <a style="color: black; text-decoration: none;" href="homeMenu.php?loginLogout=true"><?php echo $loginLogoutText;?></a>
                     </li>
                 </ul>
             </div>
@@ -41,6 +76,7 @@
     </nav>
     <div id='menu-container' class="py-5 rounded-lg mx-auto" style="width: 70%;">
         <!-- Filters -->
+        <h4 style='color:grey;'><?php echo $userText;?></h4>
         <h2><strong>Filters</strong></h2>
         <div id="filter_container" class="d-flex flex-row flex-wrap bg-light p-5 rounded-lg mx-auto my-5 row" style="width: 100%;">
             <div class='col-4 d-flex flex-row align-items-center'>
@@ -98,6 +134,8 @@
     hasilCb = "Semua";
     cekHarga = 0;
 
+    isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false';?>;
+
     function fetch_menu_appetizer() {
         let r = new XMLHttpRequest();
         let appetizer_container = document.getElementById("appetizer_container");
@@ -110,7 +148,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuAppetizer&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
+        r.send(`jenis=fetchMenuAppetizer&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga+`&isLoggedIn=`+isLoggedIn);
     }
 
     function fetch_menu_main_course() {
@@ -125,7 +163,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuMainCourse&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
+        r.send(`jenis=fetchMenuMainCourse&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga+`&isLoggedIn=`+isLoggedIn);
     }
     
     function fetch_menu_drinks() {
@@ -140,7 +178,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuDrinks&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
+        r.send(`jenis=fetchMenuDrinks&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga+`&isLoggedIn=`+isLoggedIn);
     }
 
     function fetch_menu_desert() {
@@ -155,7 +193,7 @@
         
         r.open('POST', 'ajax.php');
         r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        r.send(`jenis=fetchMenuDesert&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga);
+        r.send(`jenis=fetchMenuDesert&isHome=true&keyword=`+hasilSearch+`&kat=`+hasilCb+`&harga=`+cekHarga+`&isLoggedIn=`+isLoggedIn);
     }
 
     function initPage() {

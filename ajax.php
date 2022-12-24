@@ -7,6 +7,7 @@
             $hasilCb = $_POST['kat'];
             $cekHarga = $_POST['harga'];
             $keyword = "%" . $hasilSearch . "%";
+            $isLoggedIn = $_POST['isLoggedIn'];
 
             if($hasilCb == "Semua")
                 if($cekHarga == 0)
@@ -35,7 +36,9 @@
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
                             echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            if($isLoggedIn == 'true'){
+                                echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            }
                         echo"</div>";
                     echo"</div>";
                 }
@@ -49,6 +52,7 @@
             $hasilCb = $_POST['kat'];
             $cekHarga = $_POST['harga'];
             $keyword = "%" . $hasilSearch . "%";
+            $isLoggedIn = $_POST['isLoggedIn'];
 
             if($hasilCb == "Semua")
                 if($cekHarga == 0)
@@ -77,7 +81,9 @@
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
                             echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            if($isLoggedIn == 'true'){
+                                echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            }
                         echo"</div>";
                     echo"</div>";
                 }
@@ -91,6 +97,7 @@
             $hasilCb = $_POST['kat'];
             $cekHarga = $_POST['harga'];
             $keyword = "%" . $hasilSearch . "%";
+            $isLoggedIn = $_POST['isLoggedIn'];
 
             if($hasilCb == "Semua")
                 if($cekHarga == 0)
@@ -119,7 +126,9 @@
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
                             echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            if($isLoggedIn == 'true'){
+                                echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            }
                         echo"</div>";
                     echo"</div>";
                 }
@@ -132,6 +141,7 @@
             $hasilCb = $_POST['kat'];
             $cekHarga = $_POST['harga'];
             $keyword = "%" . $hasilSearch . "%";
+            $isLoggedIn = $_POST['isLoggedIn'];
 
             if($hasilCb == "Semua")
                 if($cekHarga == 0)
@@ -160,7 +170,9 @@
                             echo"<div class='col-6 fs-5'>Quantity: </div>";
                             echo"<div class='col-6'><input type='number' min='0' max=$menu_stok class='form-control input-lg' id='quantityInput$menu_id' value='0'></div>";
                             echo"</div>";
-                            echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            if($isLoggedIn == 'true'){
+                                echo"<button type='button' id='menuId$menu_id' onclick='addCart(this.id)' name='addCartButton' class='btn btn-primary me-1 grey'>Add to Cart</button>";
+                            }
                         echo"</div>";
                     echo"</div>";
                 }
@@ -347,7 +359,8 @@
 
     if($_POST['jenis'] == "fetchCart" && isset($_SESSION['cart'])){
         // Header
-        echo"<div style='width: 100%;' class='mb-5 h3'>Cart</div>";
+        $cartName = $_POST['cartName'];
+        echo"<div style='width: 100%;' class='mb-5 h3'>$cartName's Cart</div>";
         echo"
             <table class='table'>
                 <tr>
