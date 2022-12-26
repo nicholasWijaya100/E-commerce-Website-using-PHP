@@ -93,6 +93,8 @@ $snapToken = Veritrans_Snap::getSnapToken($transaction);
 
 <!DOCTYPE html>
 <html>
+  <title>Payment</title>
+  <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
   <body onload='load()'>
 
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
